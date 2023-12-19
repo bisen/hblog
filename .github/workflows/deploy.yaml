@@ -28,5 +28,5 @@ jobs:
         script: |
           cd hblog
           git stash
-          git pull --force origin master
+          git pull --recurse-submodules --force origin master
           hugo -s . -t /var/www/hblog -d ~/hblog/ --cacheDir ~/hugocache
