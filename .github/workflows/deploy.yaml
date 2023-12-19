@@ -26,7 +26,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd repo
+          cd hblog
           git stash
           git pull --force origin master
           hugo -s . -t /var/www/hblog -d ~/hblog/ --cacheDir ~/hugocache
