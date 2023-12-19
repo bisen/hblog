@@ -22,7 +22,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: birol.site
-        username: ${{ secrets.USERNAME }
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
         script: |
