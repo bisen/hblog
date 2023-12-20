@@ -28,7 +28,7 @@
 {{ $official_cdn := "https://www.gravatar.com/avatar/" }}<!---->
 {{ $cdn := (site.Params.gravatarCdn | default $official_cdn) }}<!---->
 {{ $md5 := (md5 site.Params.avatar) }}<!---->
-{{ $avatar_url := print $cdn $md5 "?s=160&d=identicon" }}<!---->
+{{ $avatar_url := "https://birol-hblog-assets.s3.us-east-2.amazonaws.com/birol_blog.webp" }}<!---->
 {{ $.Scratch.Set "avatar_url" $avatar_url }}<!---->
 {{ end }}<!---->
 {{ end }}<!---->

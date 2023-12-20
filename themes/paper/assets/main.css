@@ -6,7 +6,7 @@
  */
 
 /*
- ! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
+ ! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
  */
 
 /*
@@ -39,9 +39,11 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -51,12 +53,14 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -128,8 +132,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -138,8 +144,12 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-size: 1em;
+  font-feature-settings: normal;
   /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -455,7 +465,7 @@ body {
   background: var(--bg);
 }
 
-:is(.dark body) {
+:is(:where(.dark) body) {
   background-color: rgb(0 0 0 / 0.9);
 }
 
@@ -1125,7 +1135,7 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-:is(.dark .btn) {
+:is(:where(.dark) .btn) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
@@ -1141,7 +1151,7 @@ body {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-:is(.dark .link:hover) {
+:is(:where(.dark) .link:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1338,8 +1348,8 @@ body {
   width: 50%;
 }
 
-.w-16 {
-  width: 4rem;
+.w-32 {
+  width: 8rem;
 }
 
 .w-6 {
@@ -1352,6 +1362,10 @@ body {
 
 .w-\[5rem\] {
   width: 5rem;
+}
+
+.w-64 {
+  width: 16rem;
 }
 
 .max-w-3xl {
@@ -1444,10 +1458,6 @@ body {
 
 .border-black\/10 {
   border-color: rgb(0 0 0 / 0.1);
-}
-
-.\!bg-black\/5 {
-  background-color: rgb(0 0 0 / 0.05) !important;
 }
 
 .bg-black\/\[3\%\] {
@@ -1639,7 +1649,7 @@ body {
   content: var(--tw-content);
 }
 
-:is(.dark .btn-menu)::before,:is(.dark 
+:is(:where(.dark) .btn-menu)::before,:is(:where(.dark) 
   .btn-menu)::after {
   --tw-invert: invert(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1679,7 +1689,7 @@ article {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-:is(.dark article) {
+:is(:where(.dark) article) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1690,7 +1700,7 @@ article blockquote {
   border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
 }
 
-:is(.dark article blockquote) {
+:is(:where(.dark) article blockquote) {
   --tw-border-opacity: 1 !important;
   border-color: rgb(255 255 255 / var(--tw-border-opacity)) !important;
 }
@@ -1767,7 +1777,7 @@ article .highlight > div table tr td:last-of-type {
   transition: background-position 0.4s steps(5);
 }
 
-:is(.dark .dark\:prose-invert) {
+:is(:where(.dark) .dark\:prose-invert) {
   --tw-prose-body: var(--tw-prose-invert-body);
   --tw-prose-headings: var(--tw-prose-invert-headings);
   --tw-prose-lead: var(--tw-prose-invert-lead);
@@ -1796,53 +1806,8 @@ article .highlight > div table tr td:last-of-type {
   margin-bottom: 0px;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.hover\:animate-spin:hover {
-  animation: spin 1s linear infinite;
-}
-
 .hover\:bg-black\/\[2\%\]:hover {
   background-color: rgb(0 0 0 / 2%);
-}
-
-:is(.dark .dark\:\!bg-black\/80) {
-  background-color: rgb(0 0 0 / 0.8) !important;
-}
-
-:is(.dark .dark\:bg-black) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-:is(.dark .dark\:bg-white\/\[15\%\]) {
-  background-color: rgb(255 255 255 / 15%);
-}
-
-:is(.dark .dark\:bg-white\/\[8\%\]) {
-  background-color: rgb(255 255 255 / 8%);
-}
-
-:is(.dark .dark\:text-white) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-:is(.dark .dark\:invert) {
-  --tw-invert: invert(100%);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-:is(.dark .dark\:\[background-position\:right\]) {
-  background-position: right;
-}
-
-:is(.dark .dark\:hover\:bg-white\/\[3\%\]:hover) {
-  background-color: rgb(255 255 255 / 3%);
 }
 
 @media (min-width: 1024px) {
@@ -1918,3 +1883,33 @@ article .highlight > div table tr td:last-of-type {
   }
 }
 
+:is(:where(.dark) .dark\:bg-black) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+:is(:where(.dark) .dark\:bg-white\/\[15\%\]) {
+  background-color: rgb(255 255 255 / 15%);
+}
+
+:is(:where(.dark) .dark\:bg-white\/\[8\%\]) {
+  background-color: rgb(255 255 255 / 8%);
+}
+
+:is(:where(.dark) .dark\:text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) .dark\:invert) {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+:is(:where(.dark) .dark\:\[background-position\:right\]) {
+  background-position: right;
+}
+
+:is(:where(.dark) .dark\:hover\:bg-white\/\[3\%\]:hover) {
+  background-color: rgb(255 255 255 / 3%);
+}
